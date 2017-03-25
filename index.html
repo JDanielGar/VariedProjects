@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chats</title>
+	<meta charset="utf-8">
+	<script src="libs/jquery-3.2.0.min.js"></script>
+</head>
+<body>
+
+<div class="main-chat">	
+	<h1>Chat Ñeruco</h1>
+	<div class="interfaz-chat">
+	</div>
+	<div class="interaccion-chat">
+		<input type="text" name="chat-entrada" id="chat-entrada" placeholder="Escribe tu mensaje aqui">
+		<a href="#" id="enviar">Enviar</a>
+	</div>
+</div>
+<div class="interfaz-colores">
+	<a href="#" id="boton-verde">Verde</a>
+	<a href="#" id="boton-azul">Azul</a>
+</div>
+
+
+<script type="text/javascript">
+	// Propiedades para el chat que se envia.
+	chatDefecto = {
+		interfaz : $(".interfaz-chat").css({'width' : '40%', 'margin' : 'auto', 'border' : '1px solid black'}),
+		interaccion : $(".interaccion-chat").css({'width' : '40%', 'margin' : 'auto'}),
+		color : $(".interfaz-colores").css({'width' : '40%', 'margin' : 'auto'})
+	}
+
+	chatGeneral = {
+		color : "",
+		mensaje : "",
+		titulo : "Titulo:",
+	}
+
+	// 
+	var numeroChats = 0
+	// Metodo determinante de propiedades
+
+	function crearMensaje(){
+		numeroChats++
+		$(".interfaz-chat").append('<div class="chat '+numeroChats+'"><div>'+chatGeneral.titulo+'</div><a href="#" class="cerrar">x</a><div>'+chatGeneral.mensaje+'</div>')
+		$(".chat").last().css({'background-color' : chatGeneral.color})		
+	}
+	function propiedadesMensaje() {
+		chatGeneral.mensaje = $("#chat-entrada").val()
+		crearMensaje()
+	}
+
+	function propiedadesColor(color) {
+			chatGeneral.color = color;
+	}
+
+
+	$("#enviar").click(propiedadesMensaje);
+
+	$("#boton-verde").click(function(){
+		propiedadesColor("green");
+	})
+
+	$("#boton-azul").click(function(){
+		propiedadesColor("blue");
+	})
+
+	$(document).on('click', '.cerrar', function() {
+	    $(this).parent().remove();
+	});
+
+	// Color titulo mensaje clonar y x
+
+</script>
+</body>
+</html>
